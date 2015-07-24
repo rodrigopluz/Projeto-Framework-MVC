@@ -1,0 +1,31 @@
+#cadastro_usuario {
+	padding: 10px;
+}
+
+#cadastro_usuario label {
+	display: block;
+}
+
+#cadastro_usuario .titulo {
+	border-bottom: #ccc solid 1px;
+	font-size: 12px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+#cadastro_usuario .modulos {
+	float: left;
+	width: 200px;
+}
+
+
+#cadastro_usuario .criar_conta {
+	text-indent: -9999px;
+	display: block;
+	width: 99px;
+	height: 28px;
+	float: right;
+	border: none;
+	background: url(../../img/sprite_img.jpg) no-repeat -778px -162px;
+	cursor: pointer;
+}

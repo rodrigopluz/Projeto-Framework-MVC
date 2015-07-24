@@ -1,0 +1,181 @@
+/* -- Table Styles ------------------------------- */
+
+#images_files .progressWrapper {
+	width: 100%;
+	overflow: hidden;
+}
+
+#images_files .progressContainer {
+	margin: 5px;
+	padding: 4px;
+	border: solid 1px #E8E8E8;
+	background-color: #F7F7F7;
+	overflow: hidden;
+}
+/* Message */
+#images_files .message {
+	margin: 1em 0;
+	padding: 10px 20px;
+	border: solid 1px #FFDD99;
+	background-color: #FFFFCC;
+	overflow: hidden;
+}
+/* Error */
+#images_files .red {
+	border: solid 1px #B50000;
+	background-color: #FFEBEB;
+}
+
+/* Current */
+#images_files .green {
+	border: solid 1px #DDF0DD;
+	background-color: #EBFFEB;
+}
+
+/* Complete */
+#images_files .blue {
+	border: solid 1px #CEE2F2;
+	background-color: #F0F5FF;
+}
+
+#images_files .progressName {
+	font-size: 8pt;
+	font-weight: 700;
+	color: #555;
+	width: 323px;
+	height: 14px;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#images_files .progressBarInProgress,
+#images_files .progressBarComplete,
+#images_files .progressBarError {
+	font-size: 0;
+	width: 0%;
+	height: 2px;
+	background-color: blue;
+	margin-top: 2px;
+}
+
+#images_files .progressBarComplete {
+	width: 100%;
+	background-color: green;
+	visibility: hidden;
+}
+
+#images_files .progressBarError {
+	width: 100%;
+	background-color: red;
+	visibility: hidden;
+}
+
+#images_files .progressBarStatus {
+	margin-top: 2px;
+	width: 337px;
+	font-size: 7pt;
+	font-family: Arial;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#images_files a.progressCancel {
+	font-size: 0;
+	display: block;
+	height: 14px;
+	width: 14px;
+	background-image: url(images/cancelbutton.gif);
+	background-repeat: no-repeat;
+	background-position: -14px 0px;
+	float: right;
+}
+
+#images_files a.progressCancel:hover {
+	background-position: 0px 0px;
+}
+
+
+/* -- SWFUpload Object Styles ------------------------------- */
+#images_files .swfupload {
+	vertical-align: top;
+}
+
+
+.thumb_content {
+	float: left;
+	width: 122px;
+	height: 150px;
+	margin: 0px 14px;
+	padding: 10px;
+	text-align: center;
+	border: #ccc 1px solid;
+}
+
+.thumb_content td {
+	background-color: #EAEAEA;
+	height: 50px;
+}
+
+.thumb_content input {
+	width: 100%;
+	font: normal 11px Arial;
+	padding: 2px;
+	border: 1px solid #CCC;
+}
+
+.thumb_content span {
+	font: normal 11px Arial;
+}
+
+.btn_add_foto {
+	background-image: url(images/btn_add_foto.jpg);
+	background-repeat: no-repeat;
+	width: 119px;
+	height: 20px;
+	float: left;
+	margin-top: 10px;
+}
+
+#images_files{
+	padding-top: 10px;
+	margin-left: 12px;
+	width: 100%;
+}
+
+.aviso_foto{
+	float: right;
+	width: 500px;
+	margin-right: 50px;
+}
+
+.btn_excluir_foto{
+	background-image: url(images/btn_exclui.jpg);
+	background-repeat: no-repeat;
+	width: 17px;
+	height: 17px;
+	display: block;
+	text-indent: -9999px;
+	float: right;
+	margin-top:5px;
+}
+
+.btn_principal_foto{
+	background-image: url(images/btn_principal_foto.jpg);
+	background-repeat: no-repeat;
+	width: 56px;
+	height: 22px;
+	display: block;
+	text-indent: -9999px;
+	float: left;
+}
+.legenda {
+	float:left;
+	width:80px;
+	text-align:left;
+	margin-top:5px;
+}
+
+#divFileProgressContainer{
+	margin-top: 50px;
+}

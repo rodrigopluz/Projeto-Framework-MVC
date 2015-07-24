@@ -1,0 +1,508 @@
+<?php
+
+
+function toDecimal($valor){
+
+	$valor = str_replace(".","",$valor);
+	
+	$valor = str_replace(",",".",$valor);
+	
+	if(strlen($valor) > 6){
+		
+		$valor = str_replace(",",".",$valor);
+		//echo $valor."<br>";
+		//$valor = $valor/100;
+	}
+	$valor = str_replace(",",".",$valor);
+	//echo $valor.">".strlen($valor)."<br>";
+	
+	return $valor;
+
+}
+
+
+function date_add_days($this_date,$num_days){
+  
+   $my_time     = strtotime ($this_date);           //converts date string to UNIX timestamp
+   $timestamp   = $my_time + ($num_days * 86400);  //calculates # of days passed ($num_days) * # seconds in a day (86400)
+   $return_date = date("Y-m-d",$timestamp);       //puts the UNIX timestamp back into string format
+  
+   return $return_date;
+}
+
+function toVal($valor,$sigla=FALSE){
+	
+	//$valor = str_replace(".","",$valor);
+	$valor = number_format((float)$valor,2,",",".");
+	if($sigla)
+		return "R\$".$valor;
+	else
+		return $valor;
+	
+}
+
+function captureGlobalInfo() {
+   $info = "";
+   $getPars = 0;
+   $postPars = 0;
+
+   // data e hora
+   $info .= date("d/m/Y - H:i:s")."|";
+
+   // parâmetros GET
+   while (list($key,$value)=each($_GET)) {
+          $info .= "Parâmetro Get ".(++$getPars).": ".$key."=>".$value."|";
+   }
+
+   // parâmetros POST
+   while (list($key,$value)=each($_POST)) {
+          $info .= "Parâmetro Post ".(++$postPars).": ".$key."=>".$value."|";
+   }
+
+   // dados básicos da sessão se ela existir
+   if (defined("SESSION_OBJECT_NAME")) {
+     if (isset($_SESSION[constant("SESSION_OBJECT_NAME")])) {
+       $SESSION_OBJECT = $_SESSION[constant("SESSION_OBJECT_NAME")];
+       $info .= "Usuário de Sessão : ".$SESSION_OBJECT->getBasicInfo()."|";
+     }
+   }
+   return $info;
+}
+
+
+function getMes($month){
+	
+	switch($month){
+		case "1":
+			$nmonth = "Janeiro";
+		break;
+		case "2":
+			$nmonth = "Fevereiro";
+		break;
+		case "3":
+			$nmonth = "Março";
+		break;
+		case "4":
+			$nmonth = "Abril";
+		break;
+		case "5":
+			$nmonth = "Maio";
+		break;
+		case "6":
+			$nmonth = "Junho";
+		break;
+		case "7":
+			$nmonth = "Julho";
+		break;
+		case "8":
+			$nmonth = "Agosto";
+		break;
+		case "9":
+			$nmonth = "Setembro";
+		break;
+		case "10":
+			$nmonth = "Outubro";
+		break;
+		case "11":
+			$nmonth = "Novembro";
+		break;
+		case "12":
+			$nmonth = "Dezembro";
+		break;
+
+	}
+	return $nmonth;
+	
+}
+
+function userErrorHandler ($errno, $errmsg, $filename, $linenum, $vars) {
+   // define um array associativo de strings
+   // de erro onde as únicas entradas a serem
+   // consideradas são 2,8,256,512 e 1024
+   $errortype = array (
+               1   =>  "Error",
+               2   =>  "Warning",
+               4   =>  "Parsing Error",
+               8   =>  "Notice",
+               16  =>  "Core Error",
+               32  =>  "Core Warning",
+               64  =>  "Compile Error",
+               128 =>  "Compile Warning",
+               256 =>  "User Error",
+               512 =>  "User Warning",
+               1024=>  "User Notice"
+               );
+
+   // define mensagens de erro que devem ser ignoradas
+   $ignore_errors = array (
+               "UNDEFINED INDEX",
+               "USE OF UNDEFINED CONSTANT"
+               );
+
+   // verifica se o erro capturado não corresponde
+   // a algum tipo de erro que deve ser ignorado
+   $trigger_error = TRUE;
+   for ($i=0; $i<count($ignore_errors); $i++) {
+       if (ereg($ignore_errors[$i],strtoupper($errmsg))) {
+           $trigger_error = FALSE;
+       }
+   }
+   if ($trigger_error) {
+      // conjunto de tipos de erros para os quais será feito var trace
+      $user_errors = array(E_USER_ERROR, E_USER_WARNING, E_USER_NOTICE);
+
+      // armazena os dados capturados pelo tratador de erros
+      // número do erro, tipo do erro, mensagem de erro, arquivo e linha do código
+      $err = $errno."|";
+      $err .= $errortype[$errno]."|";
+      $err .= $errmsg."|";
+      $err .= $filename."|";
+      $err .= $linenum."|";
+
+      // realiza var trace para erros de usuário
+      if (in_array($errno, $user_errors)) {
+        ob_start();
+        var_dump($vars);
+        $err .= ob_get_contents();
+        ob_end_clean();
+      }
+
+      // imprime o erro para visualização local
+      if (LOCAL == "APOLO") {
+        friendlyErrorMessage($err,$errortype[$errno]);
+      }
+
+      // salva no log de erros
+      if (defined('PHP_ERROR_LOG_DEST')) {
+         error_log(captureGlobalInfo().$err."<*>\n", 3, PHP_ERROR_LOG_DEST);
+      }
+      else {
+         error_log(captureGlobalInfo().$err."<*>\n", 3, PHP_ERROR_LOG_DEST);
+      }
+   }
+}
+
+function friendlyErrorMessage($err,$type) {
+   echo "<table cellspacing='0' border='1' bordercolor='#000000'>\n";
+   echo "<tr><td align='left'><font color='#ff0000'><b>".strtoupper($type).":</b></font></td></tr>\n";
+   echo "<tr><td align='left'>".str_replace("|",",",$err)."</td></tr>\n";
+   echo "</table>\n";
+}
+
+function captureShutdown() {
+   if (connection_aborted() && connection_timeout()) {
+     $fp = fopen(GLOBAL_PATH."logs/php_timeout.txt","w+");
+     fputs($fp,"Timeout já abortado!");
+     fclose($fp);
+   }
+   else if (connection_timeout()) {
+     $fp = fopen(GLOBAL_PATH."logs/php_timeout.txt","w+");
+     fputs($fp,"Timeout!");
+     fclose($fp);
+   }
+}
+
+function alert($msg) {
+  echo "<SCRIPT LANGUAGE='JavaScript'>\n";
+  echo "  alert(\"".$msg."\");\n";
+  echo "</SCRIPT>";
+}
+
+function confirm($msg,$true_action="",$false_action="") {
+  if ($true_action != "") {
+    $out .= "<SCRIPT>\n";
+    $out .= "if (confirm(\"$msg\")) {\n";
+    $out .= $true_action."\n";
+    $out .= "}\n";
+    if ($false_action != "") {
+    $out .= "else {";
+    $out .= $false_action."\n";
+    $out .= "}";
+    }
+    $out .= "</SCRIPT>\n";
+  }
+  elseif ($false_action != "") {
+    $out .= "<SCRIPT>\n";
+    $out .= "if (!confirm(\"$msg\")) {\n";
+    $out .= $false_action."\n";
+    $out .= "}\n";
+    $out .= "</SCRIPT>\n";
+  }
+  echo $out;
+}
+
+function closeWindow() {
+  echo "<SCRIPT LANGUAGE='Javascript'>\n";
+  echo "  if (parent) parent.close(); else window.close();\n";
+  echo "</SCRIPT>\n";
+}
+
+function redirect($url,$object="document") {
+  echo "<SCRIPT LANGUAGE='Javascript'>\n";
+  echo "  ".$object.".location.href = \"".$url."\"\n";
+  echo "</SCRIPT>\n";
+}
+
+function replace($url) {
+  echo "<SCRIPT LANGUAGE='JavaScript'>\n";
+  echo "  location.replace(\"".$url."\");\n";
+  echo "</SCRIPT>\n";
+}
+
+function reload() {
+  echo "<SCRIPT LANGUAGE='JavaScript'>\n";
+  echo "reload()\n";
+  echo "</SCRIPT>\n";
+}
+
+function refresh($url,$time=1) {
+  echo "<META HTTP-EQUIV=\"refresh\" content=\"".$time."; URL=".$url."\">";
+}
+
+function focus($form,$field,$object="")
+{
+  if ($object != "") $object .= ".";
+  echo "<SCRIPT>".$object."document.".$form.".".$field.".focus();</SCRIPT>\n";
+}
+
+function mouseOver($texto,$return=TRUE) {
+  $mText = "TITLE='$texto' onMouseOver='window.status=\"$texto\";return true;'".
+    "onMouseOut='window.status=\"\";return true;'";
+  if ($return) {
+    return $mText;
+  }
+  else {
+    echo $mText;
+  }
+}
+
+function HTML_navigator($HTTP_USER_AGENT)
+{
+  if (ereg("MSIE",$HTTP_USER_AGENT)) {
+    return "iex";
+  }
+  else if (ereg("Opera",$HTTP_USER_AGENT)) {
+    return "opr";
+  }
+  else if (ereg("Gecko",$HTTP_USER_AGENT)) {
+    return "nav6";
+  }
+  else if (ereg("Mozilla",$HTTP_USER_AGENT)) {
+    return "nav";
+  }
+  else return "xxx";
+}
+
+function navigator()
+{
+  $navAgent = @getenv("HTTP_USER_AGENT");
+  if (ereg("MSIE",$navAgent)) {
+    if (ereg("5.5",$navAgent)) {
+      return "ie55";
+    }
+    else if (ereg("5",$navAgent)) {
+      return "ie5";
+    }
+    elseif (ereg("6",$navAgent)) {
+      return "ie6";
+    }
+    else return "ie4";
+  }
+  else if (ereg("Opera",$navAgent)) {
+    return "opr";
+  }
+  else if (ereg("Gecko",$navAgent)) {
+    return "nav6";
+  }
+  else if (ereg("Mozilla",$navAgent)) {
+    return "nav";
+  }
+  else return "xxx";
+}
+
+function flashMovie($src,$wid=0,$hei=0,$arrPars=array()) {
+  $srcP = $src;
+  if (!empty($arrPars)) {
+     $srcP .= "?";
+     foreach($arrPars as $key=>$value) {
+          $srcP .= $key."=".$value."&";
+     }
+     $srcP = substr($srcP,0,strlen($srcP)-1);
+  }
+  return sprintf("<OBJECT CLASSID='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' CODEBASE='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0'%s%s ALIGN='top'>
+                  <PARAM NAME=movie VALUE='%s'>
+                  <PARAM NAME='QUALITY' VALUE='high'>
+                  <EMBED SRC='%s' QUALITY='high' PLUGINSPAGE='http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash' TYPE='application/x-shockwave-flash'%s%s ALIGN='top' SCALE='exactfit'>
+                  </EMBED>
+                  </OBJECT>",
+                  ($wid > 0) ? " WIDTH='".$wid."'" : "",
+                  ($hei > 0) ? " HEIGHT='".$hei."'" : "",
+                  $srcP,$src,
+                  ($wid > 0) ? " WIDTH='".$wid."'" : "",
+                  ($hei > 0) ? " HEIGHT='".$hei."'" : "");
+}
+
+function image($src,$alt="",$wid=0,$hei=0,$hspace=-1,$vspace=-1) {
+  return sprintf("<IMG SRC='%s' BORDER='0'%s%s%s%s%s>",$src,
+                 ($alt != "" ? " ALT='".$alt."'" : ""),
+                 ($wid > 0 ? " WIDTH='".$wid."'" : ""),
+                 ($hei > 0 ? " HEIGHT='".$hei."'" : ""),
+                 ($hspace > -1 ? " HSPACE='".$hspace."'" : ""),
+   ($vspace > -1 ? " VSPACE='".$vspace."'" : ""));
+}
+
+function button($name="btn",$text="Ok",$script="",$alt="Enviar",$type,$imgButton="")
+
+{
+  global $HTTP_USER_AGENT;
+  $classb = ((HTML_navigator($HTTP_USER_AGENT) == "iex") || (HTML_navigator($HTTP_USER_AGENT) == "nav6")) ? "CLASS='boxlogin'" : "";
+  $imageb = ($type == "image") ? "SRC='".$imgButton."'" : "";
+  return "<INPUT TYPE='$type' $imageb NAME='ign_$name' VALUE='$text' $classb $script>";
+}
+
+function nobreakspace($n)
+{
+  return str_repeat('&nbsp;', $n);
+}
+
+function toMySQLDate($date)
+{
+  if (ereg("([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})", $date, $regs))
+    return "$regs[3]/$regs[2]/$regs[1]";
+}
+
+function toMySQLCodeDate($date)
+{
+  if (ereg("([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})", $date, $regs))
+    return "$regs[3]-$regs[2]-$regs[1]";
+  if (ereg("([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})", $date, $regs))
+    return "$regs[1]-$regs[2]-$regs[3]";
+}
+
+function toSQLDataNascimento($date)
+{
+  if (ereg("([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})", $date, $regs))
+    return "0000-$regs[2]-$regs[1]";
+  if (ereg("([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})", $date, $regs))
+    return "00000-$regs[2]-$regs[3]";
+}
+
+function convertDate($date="date('d/m/Y')")
+{
+
+	$arrDate = explode("/", $date);
+	$strDate = $arrDate[2]."-".$arrDate[1]."-".$arrDate[0];
+	
+	return $strDate;
+}
+
+function toBrDate($date)
+{
+
+	if ($date != '') {
+		
+	  $aux=explode('-',$date);
+	  return ($aux[2].'/'.$aux[1].'/'.$aux[0]);
+	  
+	}
+	else return '';
+}
+
+function dataHoje()
+{
+  $dia_semana=date('w');
+  switch ($dia_semana){
+    case 0:
+      $dia_semana='Domingo';
+      break;
+    case 1:
+      $dia_semana='Segunda';
+      break;
+    case 2:
+      $dia_semana='Terça';
+      break;
+    case 3:
+      $dia_semana='Quarta';
+      break;
+    case 4:
+      $dia_semana='Quinta';
+      break;
+    case 5:
+      $dia_semana='Sexta';
+      break;
+    case 6:
+      $dia_semana='Sábado';
+      break;
+  }
+  return 'Brasil, '.$dia_semana.', '.date('d/m/Y');
+}
+
+function alltrim($string)
+{
+  $aux = rtrim(ltrim($string));
+  $pos = strpos($aux,"  ");
+  while ($pos !== false) {
+    $aux = str_replace("  "," ",$aux);
+    $pos = strpos($aux,"  ");
+  }
+  return $aux;
+}
+
+function acesso($nivel=0)
+{
+  session_start();
+
+  global $sesvar;
+
+  if($nivel!=0)
+  {
+    if(empty($sesvar)){
+      ?>
+      <script>
+      alert("Você não está autorizado a acessar esta página! Por Favor, cadastre-se ! ");
+      location.href="<?php echo LOCAL_PATH;?>";
+      </script>
+      <?php
+    } else
+    {
+      if($sesvar[4]<$nivel)
+      {
+        ?>
+        <script>
+        alert("Você não está autorizado a acessar esta página!");
+        location.href="<?echo LOCAL_PATH;?>";
+        </script>
+        <?php
+      }
+
+    }
+  }
+
+}
+
+function mkSwfTag($path,$l,$a,$file,$bgcolor='',$tansparent=FALSE,$vars='') {
+
+   if(!empty($vars)) {
+     $params = "?".$vars;
+   }
+
+   $objectswf = "<OBJECT classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'  codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0'  WIDTH='$l' HEIGHT='$a'>\n";
+   $objectswf .= "   <PARAM NAME=movie VALUE='".$path.$file.$params."'>\n";
+   $objectswf .= "   <PARAM NAME=quality VALUE=high>\n";
+
+   if(!empty($bgcolor))   {
+     $objectswf .= " <PARAM NAME=bgcolor VALUE=#FFFFFF>\n";
+   }
+
+   if($transparent == TRUE) {
+     $objectswf .= " <PARAM NAME=wmode VALUE=transparent>\n";
+   }
+
+   $objectswf .= "  <EMBED src='".$path.$file.$params."' quality=high bgcolor=#99CC00  WIDTH='$l' HEIGHT='$a' TYPE='application/x-shockwave-flash' PLUGINSPAGE='http://www.macromedia.com/go/getflashplayer'></EMBED>\n";
+   $objectswf .= "</OBJECT>\n";
+
+   return $objectswf;
+
+}
+
+?>

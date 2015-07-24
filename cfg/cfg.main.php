@@ -11,9 +11,9 @@ if (eregi("cfg.main.php", $PHP_SELF)) {
  * CONFIGURACOES BASICAS
  */
 define("DOMINIO", ""); // DOMINIO
-define("DIRETORIO", "/projeto_pessoal/mvc"); // DIRETORIO
+define("DIRETORIO", "/mvc"); // DIRETORIO
 define('TITLE', 'CMS MVC'); // Titulo do site
-define("SITE", "projeto_pessoal/mvc"); // DIRETORIO
+define("SITE", "mvc"); // DIRETORIO
 
 /*
  * META-TAGS

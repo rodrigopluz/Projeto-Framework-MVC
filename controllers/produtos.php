@@ -202,12 +202,14 @@ function salva() {
         $db->db_query($sql);
         
         if (isset($last)) {
-            header('Location: ?on=produtos');
+            //header('Location: ?on=produtos');
+			header('Location: ?on=produtos&in=lista');
         } else {
             #@ monta retorno com erro com session
             $_SESSION['msg']['erro'] = 'Erro no cadastro tente novamente';
         }
-    } elseif ($_POST['action'] == 'update' && $spam == false) {
+    } 
+	elseif ($_POST['action'] == 'update' && $spam == false) {
 
         ### ARQUIVO
         $ext = strtolower(basename($_FILES["file"]["name"]));

@@ -43,15 +43,17 @@
                     <label>Nome da Categoria:</label>
                     <input type="text" name="categoria" id="categoria" value="" maxlength="255" class="frm w270 border" />
                     <br/>
+                    <!--
                     <label>Logo da Categoria em PNG:</label>
                     <input type="file" name="file" id="file" />
+                    -->
                 </div>
             </li>
             <li>
                 <p id="retorno_erro">
-                    <!-- START BLOCK : bloco_msg_1 -->
+                    <!-- START BLOCK : bloco_msg_1-2 -->
                     {msg}
-                    <!-- END BLOCK : bloco_msg_1 -->
+                    <!-- END BLOCK : bloco_msg_1-2 -->
                 </p>
                 <input type="button" class="btn_voltar" onClick="javascript:history.back(-1);">
                 <input type="button" class="{classe_botao_acao}" name="Submit" value=" " onclick="validaCategoriaProduto();">

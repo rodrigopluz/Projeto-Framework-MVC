@@ -46,34 +46,18 @@ class htmlStructure extends html {
         parent::addScript("common.js", FALSE);
 
         parent::addScript("jquery.autocomplete.js", FALSE);
-
         parent::addScript("functions.js", FALSE);
+		
         if (is_file(SCRIPT_SERVER_PATH . "modulos/" . $_GET['on'] . ".js"))
             parent::addScript("modulos/" . $_GET['on'] . ".js", FALSE);
-        parent::addScript("plugins-jquery/scripts/tiny_mce/tiny_mce.js", FALSE);
+        	parent::addScript("plugins-jquery/scripts/tiny_mce/tiny_mce.js", FALSE);
+	        parent::addScript("plugins-jquery/colorbox/jquery.colorbox-min.js", FALSE);
+    		parent::addStyle(SCRIPT_PATH . "plugins-jquery/colorbox/colorbox.css", FALSE);
 
-        parent::addScript("plugins-jquery/colorbox/jquery.colorbox-min.js", FALSE);
-        parent::addStyle(SCRIPT_PATH . "plugins-jquery/colorbox/colorbox.css", FALSE);
-
-        if ($_GET['on'] == "galeria") {
-            parent::addScript("swfupload/swfupload.js", FALSE);
-            parent::addScript("swfupload/handlers.js", FALSE);
-        }
-        if ($_GET['on'] == "feiras") {
-            parent::addScript("swfupload/feiras/swfupload-feiras.js", FALSE);
-            parent::addScript("swfupload/feiras/handlers-feiras.js", FALSE);
-        }
-        if ($_GET['on'] == "exposicoes") {
-            parent::addScript("swfupload/exposicoes/swfupload-exposicoes.js", FALSE);
-            parent::addScript("swfupload/exposicoes/handlers-exposicoes.js", FALSE);
-        }
         if ($_GET['on'] == "produtos") {
             parent::addScript("plugins-jquery/jquery.highlightFade.js", FALSE);
         }
-        if ($_GET['on'] == "gourmet") {
-            parent::addScript("plugins-jquery/jquery.highlightFade.js", FALSE);
-        }
-
+        
         parent::addStyle("styles.css");
         parent::addStyle("styles_ie.css");
         parent::addStyle("pagination.css");
@@ -81,17 +65,6 @@ class htmlStructure extends html {
 
         if (is_file(STYLE_SERVER_PATH . "modulos/" . $_GET['on'] . ".css"))
             parent::addStyle("modulos/" . $_GET['on'] . ".css");
-
-
-        if ($_GET['on'] == "galeria") {
-            parent::addStyle(SCRIPT_PATH . "swfupload/swfupload.css", FALSE);
-        }
-        if ($_GET['on'] == "feiras") {
-            parent::addStyle(SCRIPT_PATH . "swfupload/feiras/swfupload-feiras.css", FALSE);
-        }
-        if ($_GET['on'] == "exposicoes") {
-            parent::addStyle(SCRIPT_PATH . "swfupload/exposicoes/swfupload-exposicoes.css", FALSE);
-        }
 
         parent::makePage();
 
@@ -143,10 +116,7 @@ class htmlStructure extends html {
                 $MENU->newBlock('menu');
                 $MENU->assign($row);
 
-                $sql = "SELECT link, nome as sub FROM app_modulos_links
-							WHERE modulo_id = '" . $row['modulo_id'] . "'
-							ORDER BY modulo_id";
-                
+                $sql = "SELECT link, nome as sub FROM app_modulos_links WHERE modulo_id = '" . $row['modulo_id'] . "' ORDER BY modulo_id";
                 $r = $db->db_query($sql);
                 foreach ($r as $rs) {
                     if ($_GET['on'] == $row['arquivo'])
@@ -188,10 +158,8 @@ class htmlStructure extends html {
         $RODAPE->assignGlobal("spam", $urls->spam);
         $RODAPE->assignGlobal($urls->var);
 
-
         $this->body->substituiValor("rodape", $RODAPE->getOutputContent());
     }
-
 }
 
 ?>

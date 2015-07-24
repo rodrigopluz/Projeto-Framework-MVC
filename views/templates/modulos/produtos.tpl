@@ -229,7 +229,7 @@
                     <!-- END BLOCK : bloco_msg_1-prod -->
                 </p>
                 <input type="button" class="btn_voltar" onClick="javascript:history.back(-1);">
-                <input type="button" class="{classe_botao_acao}" name="Submit" value=" "  onclick="validaCadastroTarefas();" >
+                <input type="button" class="{classe_botao_acao}" name="Submit" value=" "  onclick="validaCadastroProdutos();" >
             </li>
         </ul>
     </form>
@@ -334,7 +334,7 @@
                     <!-- END BLOCK : bloco_msg_2-prod -->
                 </p>
                 <input type="button" class="btn_voltar" onClick="javascript:history.back(-1);">
-                <input type="button" class="{classe_botao_acao}" name="Submit" value=" " onclick="validaCadastroTarefas();" >
+                <input type="button" class="{classe_botao_acao}" name="Submit" value=" " onclick="validaCadastroProdutos();" >
             </li>
         </ul>
     </form>

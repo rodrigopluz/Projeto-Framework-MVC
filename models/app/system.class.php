@@ -1,5 +1,4 @@
 <?php
-
 class system {
 	
 	function __construct() {
@@ -19,8 +18,8 @@ class system {
 		if(count($dados) > 0)
 		foreach ($dados as $key=>$value) $where .= " AND $key = '".$value."' ";
 
-		$sql 	= "SELECT * FROM ".$tabela." WHERE 1 ". $where . $order;
-		$rows 	= $db->db_query($sql);
+		$sql  = "SELECT * FROM ".$tabela." WHERE 1 ". $where . $order;
+		$rows = $db->db_query($sql);
 		
 		if(count($rows) > 0) return $rows;
 		else 				 return false;
@@ -38,8 +37,8 @@ class system {
 	
 		if($where != '') $where = " AND ".$where;
 
-		$sql 	= "SELECT * FROM ".$tabela." WHERE 1 ". $where . $order;
-		$rows 	= $db->db_query($sql);
+		$sql  = "SELECT * FROM ".$tabela." WHERE 1 ". $where . $order;
+		$rows = $db->db_query($sql);
 		
 		if(count($rows) > 0) return $rows;
 		else 				 return false;
@@ -59,7 +58,6 @@ class system {
 
 		foreach ($array_value as $row) {
 			$selected = $row[$value] == $request ? 'selected="selected"' : '';
-
 			$return .= '<option value="'.$row[$value].'" '.$selected.'>'.($row[$text]).'</option>';
 		}
 
@@ -91,7 +89,6 @@ class system {
 		
 		if(is_array($ar)) return $ar;
 		else 			  return $r;
-		
 	}
 	
 	/**
@@ -112,8 +109,7 @@ class system {
 		$MAIL->assign('titulo',$titulo);
 		$MAIL->assign('texto',$texto);
 		
-		return $MAIL->getOutputContent();	
-		
+		return $MAIL->getOutputContent();
 	}
 	
 	/**
@@ -131,8 +127,7 @@ class system {
 		$mail->Password   = "troqueiaenhadenobo";  // GMAIL password
 		$mail->SetFrom	('maisvantagens@maisvantagens.com', 'CMS Mais Vantagens');
 		
-		//$mail->AddBCC('google@linklar.com.br','Linklar');
-		
+		//$mail->AddBCC('google@linklar.com.br','Linklar');	
 	}
 	
 	/**
@@ -187,5 +182,4 @@ class system {
 			imagejpeg($img, $arquivo_novo);
 		}
 	}
-	
 }

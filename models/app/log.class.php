@@ -1,5 +1,4 @@
 <?php
-
 class log {
 	
 	var $assunto 		 = '';
@@ -39,9 +38,6 @@ class log {
 		
 		$set = implode(',',$set);
 		
-		$db->db_insert('log_email',$set);
-		
+		$db->db_insert('log_email',$set);	
 	}
-	
-
 }

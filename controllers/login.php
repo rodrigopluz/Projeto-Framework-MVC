@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(0);
 ini_set("display_errors","0");
 
@@ -13,7 +12,7 @@ if ($_GET['in'] != 'ajax' && $_GET['in'] != 'logout'){
 	$HTML-> makeLog = FALSE;
 	$HTML-> printPage();
 } else
-Main();
+	Main();
 
 function Main(){
 	global $TPLV, $bottom, $db, $migalha, $usuario;

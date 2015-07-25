@@ -1,5 +1,4 @@
 <?php
-
 class tools extends system  {
 	var $usuario_id;
 	var $imovel_id;
@@ -7,8 +6,7 @@ class tools extends system  {
 	function __construct($usuario_id) {
 		global $urls;
 		
-		$this->usuario_id = $usuario_id;
-		
+		$this->usuario_id = $usuario_id;	
 	}
 	
 	public function getTools($usuario_tipo_id) {
@@ -18,22 +16,22 @@ class tools extends system  {
 				$this->anuncios->listar(); //comprar
 				$this->favoritos->listar();
 				$this->leads->listar();
-			break;
+				break;
 			case '2': // CORRETOR
 				$this->anuncios->listar(); //comprar
 				$this->favoritos->listar();
 				$this->leads->listar();
-			break;
+				break;
 			case '3': //IMOBILIARIA
 				$this->anuncios->listar(); //limite
 				$this->favoritos->listar();
 				$this->leads->listar();
-			break;
+				break;
 			case '4': //INCORPORADORA
 				$this->lancamentos->listar();
 				$this->favoritos->listar();
 				$this->leads->listar();
-			break;
+				break;
 		}
 		
 		$return 	= $this->leads->getTemplate();
@@ -51,11 +49,5 @@ class tools extends system  {
 		$endereco  = str_replace(" ","",$endereco);
 		
 		return md5($estado.$cidade.$bairro.$endereco.$numero.$complemento);
-	}
-	
+	}	
 }
-
-/*
-
-
-*/

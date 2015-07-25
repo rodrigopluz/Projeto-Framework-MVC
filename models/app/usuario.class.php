@@ -1,5 +1,4 @@
 <?php
-
 class usuario extends system {
 
 	var $nome;
@@ -38,9 +37,7 @@ class usuario extends system {
 	public function login() {
 		global $db, $geral;
 		
-		$dados = array('email' => $this->email,
-				 	   'senha' => md5($this->senha));
-		
+		$dados = array('email' => $this->email, 'senha' => md5($this->senha));
 		$rows = $this->get('app_usuario',$dados,'');
 		
 		if(is_array($rows))	{
@@ -271,7 +268,8 @@ class usuario extends system {
 		if(!$this->verificaEmail($this->email_c) && isset($this->nome_c) && isset($this->permissoes)){
 			$db->db_insert('app_usuario',$set);
 			return true;
-		}else
+		} 
+		else
 			return false;
 	}
 	
@@ -308,7 +306,8 @@ class usuario extends system {
 		if(!$this->verificaEmail($this->email_c) && isset($this->nome_c)){
 			$db->db_insert('rec_usuarios',$set);
 			return true;
-		}else
+		}
+		else
 			return false;
 	}
 	
@@ -343,8 +342,6 @@ class usuario extends system {
 			
 			return true;
 		}
-		
-		
 	}
 	
 	/**
@@ -387,8 +384,6 @@ class usuario extends system {
 			
 			return true;
 		}
-		
-		
 	}
 	
 	/**
@@ -417,6 +412,5 @@ class usuario extends system {
 		$db->db_delete('app_usuario',$set);
 		
 		return true;
-		
 	}
 }

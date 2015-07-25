@@ -1,23 +1,17 @@
 <?php
-
 class Formatacao {
 	
 	function desformata ($c) {
-		
 		$c = str_replace("/","",$c);
 		$c = str_replace("\\","",$c);
 		$c = str_replace(".","",$c);
-		$c = str_replace("-","",$c);
-		
-		
+		$c = str_replace("-","",$c);		
 		return $c;
 	}
 	
 	function mascaraCPF($cpf) {
-		
 		$str = $cpf;
 		$novo_cpf = "";
-		
 		for ($i = 0 ; $i < strlen($str) ; $i ++ ) {
 			if ($i == 2)
 			   	$caracter = $str[$i] . '.';
@@ -26,11 +20,9 @@ class Formatacao {
 			elseif ($i == 8)
 				$caracter = $str[$i] . '-';
 			else 
-				$caracter = $str[$i];
-				
+				$caracter = $str[$i];				
 			$novo_cpf .= $caracter;
 		}
-		
 		return $novo_cpf;
 	}
 	
@@ -52,9 +44,6 @@ class Formatacao {
 		}
 		return $novo_cnpj;
 	}
-
-	
-	
 }
 
 $formata = new Formatacao();

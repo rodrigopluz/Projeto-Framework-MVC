@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(0);
 ini_set("display_errors","0");
 
@@ -13,7 +12,7 @@ if ($_GET['in'] != 'salvar' ){
 	$HTML-> makeLog = FALSE;
 	$HTML-> printPage();
 } else
-Main();
+	Main();
 
 function Main(){
 	global $TPLV, $bottom, $urls, $db, $migalha;
@@ -164,9 +163,6 @@ function deletar() {
 
 }
 
-###############
-### MULTIMIDIAS
-###############
 function listaMulti(){
 	global $db, $TPLV, $geral;
 

@@ -1,5 +1,4 @@
 <?php
-
 //----- classes utilizadas -----------
 require_once(CLASSE_HTML);
 //------------------------------------

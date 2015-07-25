@@ -1,6 +1,4 @@
 /* ------------------------------------------------------------
 	LINKLAR
 ---------------------------------------------------------------*/
-
-
-html, body	            { width: expression(this.scrollwidth 		< 920   ? "920px" : "auto") }
+html, body	{ width: expression(this.scrollwidth < 920 ? "920px" : "auto") }

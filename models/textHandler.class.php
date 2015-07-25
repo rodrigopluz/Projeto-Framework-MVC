@@ -1,5 +1,4 @@
 <?php
-
 if (eregi("textHandler.class.php",$_SERVER['PHP_SELF'])) {
     Header("Location: /404.php");
     die();
@@ -7,40 +6,19 @@ if (eregi("textHandler.class.php",$_SERVER['PHP_SELF'])) {
 
 class textHandler {
 
-	//var $tagperm;
-
-	/*
-	* Construtor da class
-	* pega as tags html do config
-	* <br> não deve ser permitido pois nl2br cuida disso
-	* ao inserir dados
-	*/
-	//function Sanitizador($htmltags=""){
-		//global $jpconfig;
-		//if ( $htmltags == "" ) {
-		//	$this->tagperm = $jpconfig['html_permitido'];
-		//} else {
-		//	$this->tagperm = $htmltags;
-		//}
-	//}
-	
-
-	function strip_selected_tags($text, $tags = array())
-	{	
-       $args = func_get_args();
-       $text = array_shift($args);
-       $tags = func_num_args() > 2 ? array_diff($args,array($text))  : (array)$tags;
-       foreach ($tags as $tag){
-           if(preg_match_all('/<'.$tag.'[^>]*>(.*)<\/'.$tag.'>/iU', $text, $found)){
-               $text = str_replace($found[0],$found[1],$text);
-         }
-       }
-
-       return $text;
+	function strip_selected_tags($text, $tags = array()) {	
+		$args = func_get_args();
+		$text = array_shift($args);
+		$tags = func_num_args() > 2 ? array_diff($args,array($text))  : (array)$tags;
+		foreach ($tags as $tag) {
+			if(preg_match_all('/<'.$tag.'[^>]*>(.*)<\/'.$tag.'>/iU', $text, $found)){
+				$text = str_replace($found[0],$found[1],$text);
+			}
+		}
+		return $text;
 	}
 
-	function is_empty($val)
-	{
+	function is_empty($val) {
 	   $result = false;
 	   
 	   if (empty($val)) 
@@ -55,35 +33,15 @@ class textHandler {
 	   return $result;
 	}
 	
-	function tira_acento($texto){
-		$oque = array (
-				
-				"/(?i)á|ã|â|Á|Ã|Â/",	
-				"/(?i)é|ê|É|Ê/",
-				"/(?i)í|î|Í|Î/",
-				"/(?i)ó|õ|ô|Ó|Ô|Õ/",
-				"/(?i)ú|û|Ú|Û/",
-				"/(?i)ç|Ç/",
-				"/(?i)º|ª/"
-				);
-
-		$peloque = array (
-				"a",
-				"e",
-				"i",
-				"o",
-				"u",
-				"c",
-				""
-				);
-		
+	function tira_acento($texto) {
+		$oque = array ( "/(?i)á|ã|â|Á|Ã|Â/","/(?i)é|ê|É|Ê/","/(?i)í|î|Í|Î/","/(?i)ó|õ|ô|Ó|Ô|Õ/","/(?i)ú|û|Ú|Û/","/(?i)ç|Ç/","/(?i)º|ª/"	);
+		$peloque = array ( "a","e","i","o","u","c","" );
 		return preg_replace ($oque, $peloque, $texto);
 	}	
 	
 	function utf_to_html($texto) {
 		$texto = preg_replace('/([\xc0-\xdf].)/se', "'&#' . ((ord(substr('$1', 0, 1)) - 192) * 64 + (ord(substr('$1', 1, 1)) - 128)) . ';'", $texto);
 		$texto = preg_replace('/([\xe0-\xef]..)/se', "'&#' . ((ord(substr('$1', 0, 1)) - 224) * 4096 + (ord(substr('$1', 1, 1)) - 128) * 64 + (ord(substr('$1', 2, 1)) - 128)) . ';'", $texto);
-		
 		return $texto;
 	}
 	
@@ -92,48 +50,15 @@ class textHandler {
 		$texto = str_replace("","'",$texto);
 		$texto = str_replace("",'"',$texto);
 		$texto = str_replace("",'"',$texto);
-		$texto = str_replace("",'-',$texto);
-		
+		$texto = str_replace("",'-',$texto);		
 		return $texto;
 	}
 	
 	function strtoupper_br($texto){
-		$oque = array (
-				
-				"/(?i)á/",
-				"/(?i)ã/",
-				"/(?i)â/",
-				"/(?i)é/",
-				"/(?i)ê/",
-				"/(?i)í/",
-				"/(?i)î/",
-				"/(?i)ó/",
-				"/(?i)õ/",
-				"/(?i)ô/",
-				"/(?i)ú/",
-				"/(?i)û/",
-				"/(?i)ç/"
-				
-				);
-
-		$peloque = array (
-				"Á",
-				"Ã",
-				"Â",
-				"É",
-				"Ê",
-				"Í",
-				"Î",
-				"Ó",
-				"Õ",
-				"Ô",
-				"Ú",
-				"Û",
-				"Ç"
-				);
+		$oque = array ( "/(?i)á/","/(?i)ã/","/(?i)â/","/(?i)é/","/(?i)ê/","/(?i)í/","/(?i)î/","/(?i)ó/","/(?i)õ/","/(?i)ô/","/(?i)ú/","/(?i)û/","/(?i)ç/" );
+		$peloque = array ( "Á","Ã","Â","É","Ê","Í","Î","Ó","Õ","Ô","Ú","Û","Ç" );
 				
 		$texto = strtoupper($texto);
-		
 		return preg_replace ($oque, $peloque, $texto);
 	}
 	
@@ -150,31 +75,22 @@ class textHandler {
 		$tamanhodotexto=strlen($str);
 		
 		if ($tamanhodotexto < $limite) { /// CONTROLA SE O LIMITE É MAIOR QUE A STRING
-				$strfinal = $str . "...";
-			return 	
-				$strfinal;
-		}
-		else{		
-
+			$strfinal = $str . "...";
+			return $strfinal;
+		} else {		
 			for ($i = 0; $i <= strlen($str); $i++) { 
 				if ($i > $limite) {
-
-						if ($i == strlen($str) || $str[$i]==' ' || $str[$i]==',' || $str[$i]=='.' ) {
-							$strfinal .= "...";
-							return $strfinal;
-							
-						}
-							
-						$strfinal .= $str[$i];
-				}
-				else {
+					if ($i == strlen($str) || $str[$i]==' ' || $str[$i]==',' || $str[$i]=='.' ) {
+						$strfinal .= "...";
+						return $strfinal;		
+					}
+					$strfinal .= $str[$i];
+				} else {
 					if ($i <= strlen($str)-1)
 						$strfinal .= $str[$i];
 				}
 			}
 		}
-		
-		
 		return $strfinal;
 	}
 	
@@ -256,7 +172,7 @@ class textHandler {
 		($minusculo[$X], $maiusculo[$X], $t); }
 		
 		return $t;
-		}
+	}
 }
 
 ?>

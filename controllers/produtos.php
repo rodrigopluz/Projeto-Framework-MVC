@@ -571,9 +571,9 @@ function salvar() {
             $ext = $rs[0] ['ext'];
         }
 
-        $sql = "UPDATE produtos SET categoria_id='" . $categoria_id . "', nome = '" . $nome . "', 
+        $sql = "UPDATE produtos SET categoria_id = '" . $categoria_id . "', nome = '" . $nome . "', 
 					descricao = '" . $descricao . "', descricao_preparo = '" . $descricao_preparo . "', 
-					peso = '" . $peso . "', ean='" . $ean . "', classificacao_fiscal = '" . $classificacao_fiscal . "', 
+					peso = '" . $peso . "', ean = '" . $ean . "', classificacao_fiscal = '" . $classificacao_fiscal . "', 
 					conteudo_embalagem = '" . $conteudo_embalagem . "', caixa_embarque = '" . $caixa_embarque . "', 
 					valor = '" . $valor . "', ext = '" . $ext . "', referencia = '" . $referencia . "' , 
 					status = '" . $status . "', dun1 = '" . $dun1 . "', dun2 = '" . $dun2 . "', dun3 = '" . $dun3 . "'

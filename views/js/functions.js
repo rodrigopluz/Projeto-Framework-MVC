@@ -3,52 +3,6 @@ $(document).ready(function(){
 	/* PLUGIN DE WATERMARK */
 	watermark.init();
 
-	/* MODAL DE LOGIN */
-	$('#modalLogin').click(function() {
-		$.showModal('Faça seu Login',base_url+'index.php|on=ajax&in=getLogin',
-		{
-			classe: 'boxLogin',
-			width: '458',
-			topo: '150'
-		});
-	});
-	 $('#ano-2011').live('click', function(){
-        $('#abre-2011').slideToggle();
-        $('#abre-2012').hide();
-        $('#abre-2013').hide();
-        $('#abre-2014').hide();
-    });
-
-	$('#ano-2012').live('click', function(){
-        $('#abre-2012').slideToggle();
-        $('#abre-2011').hide();
-        $('#abre-2013').hide();
-        $('#abre-2014').hide();
-    });
-    
-
-    $('#ano-2013').live('click', function(){
-        $('#abre-2013').slideToggle();
-        $('#abre-2012').hide();
-        $('#abre-2011').hide();
-        $('#abre-2014').hide();
-    });
-
-	$('#ano-2014').live('click', function(){
-        $('#abre-2014').slideToggle();
-        $('#abre-2012').hide();
-        $('#abre-2013').hide();
-        $('#abre-2011').hide();
-    });
-
-    
-
-    
-
-   
-
-	/* MODAL DE LOGIN */
-
 	/* PLUGIN DE PNG FIX */
 	if($.browser.msie && ($.browser.version == "6.0")){	$(document).pngFix(); }
 
@@ -73,8 +27,7 @@ $(document).ready(function(){
 		plugins : "safari,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
 		// fullscreen,pagebreak,
 		// Theme options
-theme_advanced_buttons1:
-"code,bold,italic,underline,justifyleft,justifycenter,justifyright,justifyfull,cleanup,link,unlink,table",
+		theme_advanced_buttons1: "code,bold,italic,underline,justifyleft,justifycenter,justifyright,justifyfull,cleanup,link,unlink,table",
 		// backcolor,fullscreen,fontselect,fontsizeselect,formatselect,strikethrough,forecolor,image,
 
 		// Theme options
@@ -89,14 +42,14 @@ theme_advanced_buttons1:
 		theme_advanced_resizing : true,
 
 		// Example content CSS (should be your site CSS)
-	 content_css : "css/content.css",
+	 	content_css : "css/content.css",
 
 		// Drop lists for link/image/media/template dialogs
 		template_external_list_url : "lists/template_list.js",
 		external_link_list_url : "lists/link_list.js",
 		external_image_list_url : "lists/image_list.js",
 		media_external_list_url : "lists/media_list.js",
-    file_browser_callback : "tinyBrowser",
+    	file_browser_callback : "tinyBrowser",
 		// Replace values for the template plugin
 		template_replace_values : {
 			username : "Some User",
@@ -124,44 +77,10 @@ function gotoAnchor(value) {
 	$("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination-20}, 500 );
 }
 
-
 function confirmation($url) {
 	if (confirm('Tem certeza que deseja excluir esta imagem?')){
 		window.location = $url;
 	}
-}
-
-function removeIngrediente(id){
-	$('#ing'+id).remove();
-}
-
-
-var ids = 5;
-function addIngrediente(data){
-
-	var novoId = ids + 1;
-	ids = novoId;
-	var element = "<div class='left' id='ing" + novoId + "'><label style='float: left;width:15px;'>Qtde</label>&nbsp;&nbsp;<input type='text' name='quantidade[]' maxlength='255' class='frm w270 border campoqtde' />&nbsp;&nbsp;<label style='float:left;width:75px;'>Ingrediente&nbsp;&nbsp;&nbsp;&nbsp;</label><input style='float:left;' type='text' name='ingredientes[]' value='' maxlength='255' class='frm w270 border campoac' />&nbsp;&nbsp;&nbsp;&nbsp;<a style='width:75px;float:left;margin:0 10px;' href='javascript:;' onClick='removeIngrediente(" + novoId + ")'>[-] Remove</a></div>";
-
-	$('#ings').append(element);
-
-	var data1 = data.split("-");
-	$(".campoac").autocomplete(data1);
-}
-
-function removePasso(id){
-	$('#pas'+id).remove();
-}
-
-
-var pas = 5;
-function addPasso(){
-
-	var novoId = pas + 1;
-	pas = novoId;
-	var element = "<div class='left' id='pas" + novoId + "'><label style='float:left;width:45px;'>Passo&nbsp;&nbsp;&nbsp;</label><input style='float:left;' type='text' name='passos[]' value='' maxlength='255' class='frm w270 border' />&nbsp;&nbsp;&nbsp;&nbsp;<a style='width:75px;float:left;margin:0 10px;' href='javascript:;' onClick='removePasso(" + novoId + ")'>[-] Remove</a></div>";
-
-	$('#passos').append(element);
 }
 
 /**
@@ -169,7 +88,6 @@ function addPasso(){
 * Expressão regular de validação de e-mail
 */
 var valEmail = /^[\w-]+(\.[\w-]+)*@(([A-Za-z\d][A-Za-z\d-]{0,61}[A-Za-z\d]\.)+[A-Za-z]{2,6}|\[\d{1,3}(\.\d{1,3}){3}\])$/;
-
 
 /* LOADING */
 function setLoading(id,texto) {
@@ -194,80 +112,78 @@ function reload() {
 /* RECARREGA A PAGINA */
 
 /* LOGIN DO USUARIO  */
-	function login(ac,vl) {
-		var url = ''
+function login(ac,vl) {
+	var url = ''
 
-		if(ac != '') url +='&ac='+ac;
-		if(vl != '') url +='&vl='+vl;
+	if(ac != '') url +='&ac='+ac;
+	if(vl != '') url +='&vl='+vl;
 
-		$.showModal('Faça seu Login',base_url+'index.php|on=ajax&in=getLogin' + url,
-		{
-			classe: 'boxLogin',
-			width: '458',
-			topo: '150'
+	$.showModal('Faça seu Login',base_url+'index.php|on=ajax&in=getLogin' + url,{
+		classe: 'boxLogin',
+		width: '458',
+		topo: '150'
+	});
+}
+
+function logar(funcao) {
+	var msg = "";
+
+	if(funcao == 'undefined' || funcao == false || funcao == undefined) funcao = '';
+
+	if($("#senha_login").val() == ""){
+		msg = "<span>* Senha não preenchido.</span><br />";
+	}
+
+	if($("#email_login").val() == "") {
+		msg = "<span>* E-mail não preenchido.</span><br />";
+	} else if(!valEmail.test($("#email_login").val())){
+		msg = "<span>* E-mail inválido.</span><br />";
+	}
+
+	disabledFormButton(".btn_entrar");
+
+	if(msg != "") {
+		$('.login #result_login').html(msg);
+		$('.login #result_login span').addClass('verm');
+		enabledFormButton(".btn_entrar");
+	} else {
+		$('.login #result_login span').removeClass('verm');
+		$('.login #result_login').html('<span>... carregando dados</span>');
+
+		$.ajax({
+			type: "POST",
+			url: base_url+"?on=ajax&in=login",
+			data: "email="+$("#email_login").val()+"&senha="+$("#senha_login").val(),
+			success: function(msg){
+				//alert(msg);
+				if(msg == 'erro') {
+					$('.login #result_login').html('<span>Dados de login incorretos. Tente novamente.</span>');
+					$('.login #result_login span').addClass('verm');
+					enabledFormButton(".btn_entrar");
+				} else if (msg == 'login') {
+					$('.login #result_login').html('<span>...redirecionado</span>');
+					$('.login #result_login span').addClass('green');
+
+					if(funcao != '') {
+						eval(funcao+'();');
+						$('#containerModal .close').click();
+					} else if($('#ac').val() != '') window.location = document.URL;
+					else					 		window.location = $('.login').attr('rel');
+
+				} else {
+					$('.login #result_login').html('<span>Erro de conexão. Tente novamente.</span>');
+					$('.login #result_login span').addClass('verm');
+					enabledFormButton(".btn_entrar");
+				}
+			}
 		});
 	}
-
-	function logar(funcao) {
-		var msg = "";
-
-		if(funcao == 'undefined' || funcao == false || funcao == undefined) funcao = '';
-
-		if($("#senha_login").val() == ""){
-			msg = "<span>* Senha não preenchido.</span><br />";
-		}
-
-		if($("#email_login").val() == ""){
-			msg = "<span>* E-mail não preenchido.</span><br />";
-		} else if(!valEmail.test($("#email_login").val())){
-			msg = "<span>* E-mail inválido.</span><br />";
-		}
-
-		disabledFormButton(".btn_entrar");
-
-		if(msg != ""){
-			$('.login #result_login').html(msg);
-			$('.login #result_login span').addClass('verm');
-			enabledFormButton(".btn_entrar");
-		} else {
-			$('.login #result_login span').removeClass('verm');
-			$('.login #result_login').html('<span>... carregando dados</span>');
-
-			$.ajax({
-				type: "POST",
-				url: base_url+"?on=ajax&in=login",
-				data: "email="+$("#email_login").val()+"&senha="+$("#senha_login").val(),
-				success: function(msg){
-					//alert(msg);
-					if(msg == 'erro') {
-						$('.login #result_login').html('<span>Dados de login incorretos. Tente novamente.</span>');
-						$('.login #result_login span').addClass('verm');
-						enabledFormButton(".btn_entrar");
-					} else if (msg == 'login') {
-						$('.login #result_login').html('<span>...redirecionado</span>');
-						$('.login #result_login span').addClass('green');
-
-						if(funcao != '') {
-							eval(funcao+'();');
-							$('#containerModal .close').click();
-						} else if($('#ac').val() != '') window.location = document.URL;
-						else					 		window.location = $('.login').attr('rel');
-
-					} else {
-						$('.login #result_login').html('<span>Erro de conexão. Tente novamente.</span>');
-						$('.login #result_login span').addClass('verm');
-						enabledFormButton(".btn_entrar");
-					}
-				}
-			});
-		}
-	}
+}
 /* LOGIN DO USUARIO */
 
 /* RECUPERAR SENHA */
 function getBoxSenha() {
-	$.showModal('Recuperar Senha',base_url+'?on=ajax&in=getSenha',
-	{
+	$.showModal('Recuperar Senha',base_url+'?on=ajax&in=getSenha', {
 		classe: 'boxLogin',
 		width: '458',
 		topo: '150'
@@ -339,20 +255,6 @@ function hideError() {
 
 function coloca_mascara(objCampo, mascara) {
 	switch(mascara) {
-		//000.000.000-00
-		case 'cpf':
-			objCampo.value = somente_numero(objCampo.value);
-			pri = objCampo.value.substring(0,3);
-			seg = objCampo.value.substring(3,6);
-			ter = objCampo.value.substring(6,9);
-			qua = objCampo.value.substring(9,11);
-
-			objCampo.value = pri+
-			((seg!='') ? '.'+seg : '')+
-			((ter!='') ? '.'+ter : '')+
-			((qua!='') ? '-'+qua : '');
-		break;
-
 		//00.000.000/0000-00
 		case 'cnpj':
 			objCampo.value = somente_numero(objCampo.value);
@@ -361,96 +263,68 @@ function coloca_mascara(objCampo, mascara) {
 			ter = objCampo.value.substring(5,8);
 			qua = objCampo.value.substring(8,12);
 			qui = objCampo.value.substring(12,14);
-
-			objCampo.value = pri+
-			((seg!='') ? '.'+seg : '')+
-			((ter!='') ? '.'+ter : '')+
-			((qua!='') ? '/'+qua : '')+
-			((qui!='') ? '-'+qui : '');
-		break;
+			objCampo.value = pri + ((seg!='') ? '.'+seg : '') + ((ter!='') ? '.'+ter : '') + ((qua!='') ? '/'+qua : '') + ((qui!='') ? '-'+qui : '');
+			break;
 
 		//(00) 0000-0000
 		case 'telefone':
 			objCampo.value = somente_numero(objCampo.value);
-
 			pri = objCampo.value.substring(0,2);
 			seg = objCampo.value.substring(2,6);
 			ter = objCampo.value.substring(6,10);
-
-			objCampo.value = ((pri!='') ? pri+'-' : '')+
-			((seg!='') ? seg : '')+
-			((ter!='') ? '.'+ter : '');
-		break;
+			objCampo.value = ((pri!='') ? pri+'-' : '') + ((seg!='') ? seg : '') + ((ter!='') ? '.'+ter : '');
+			break;
 
 		case 'telefone2':
 			objCampo.value = somente_numero(objCampo.value);
-
 			pri = objCampo.value.substring(0,2);
 			seg = objCampo.value.substring(2,7);
 			ter = objCampo.value.substring(7,11);
-
-			objCampo.value = ((pri!='') ? pri+'-' : '')+
-			((seg!='') ? seg : '')+
-			((ter!='') ? '.'+ter : '');
-		break;
+			objCampo.value = ((pri!='') ? pri+'-' : '') + ((seg!='') ? seg : '') + ((ter!='') ? '.'+ter : '');
+			break;
 
 		//00000-000
 		case 'cep':
 			objCampo.value = somente_numero(objCampo.value);
-
 			pri = objCampo.value.substring(0,5);
 			seg = objCampo.value.substring(5,8);
-
-			objCampo.value = pri+
-			((seg!='') ? '-'+seg : '');
-		break;
+			objCampo.value = pri + ((seg!='') ? '-'+seg : '');
+			break;
 
 		//00/00/0000
 		case 'data':
 			objCampo.value = somente_numero(objCampo.value);
-
 			pri = objCampo.value.substring(0,2);
 			seg = objCampo.value.substring(2,4);
 			ter = objCampo.value.substring(4,8);
-
-			objCampo.value = pri+
-			((seg!='') ? '/'+seg : '')+
-			((ter!='') ? '/'+ter : '')
-		break;
+			objCampo.value = pri + ((seg!='') ? '/'+seg : '') + ((ter!='') ? '/'+ter : '')
+			break;
 
 		//00/0000
 		case 'venc_cartao':
 			objCampo.value = somente_numero(objCampo.value);
-
 			pri = objCampo.value.substring(0,2);
 			seg = objCampo.value.substring(2,6);
-
-			objCampo.value = pri+
-			((seg!='') ? '/'+seg : '')
+			objCampo.value = pri + ((seg!='') ? '/'+seg : '')
 		break;
 
 		//0000 0000 0000 0000
 		case 'cartao':
 			objCampo.value = somente_numero(objCampo.value);
-
 			pri = objCampo.value.substring(0,4);
 			seg = objCampo.value.substring(4,8);
 			ter = objCampo.value.substring(8,12);
 			qua = objCampo.value.substring(12,16);
-
-			objCampo.value = pri+
-			((seg!='') ? '-'+seg : '')+
-			((ter!='') ? '-'+ter : '')+
-			((qua!='') ? '-'+qua : '');
-		break;
+			objCampo.value = pri + ((seg!='') ? '-'+seg : '') + ((ter!='') ? '-'+ter : '') + ((qua!='') ? '-'+qua : '');
+			break;
 
 		case 'numero':
 			objCampo.value = somente_numero(objCampo.value);
-		break;
+			break;
 
 		case 'letra':
 			objCampo.value = somente_letras(objCampo.value);
-		break;
+			break;
 
 		//1.000.000.000.000,00
 		case 'moeda':
@@ -481,12 +355,10 @@ function coloca_mascara(objCampo, mascara) {
 				}
 				if ( l > 2 ) {
 					r = s.substr(0,l-2)+','+s.substr(l-2,2);
-				}
-				else {
+				} else {
 					if ( l == 2 ) {
 						r='0,'+s;
-					}
-					else {
+					} else {
 						if ( l == 1 ) {
 							r = '0,0'+s;
 						}
@@ -494,8 +366,7 @@ function coloca_mascara(objCampo, mascara) {
 				}
 				if ( r == '' ) {
 					r = '0,00';
-				}
-				else {
+				} else {
 					l=r.length;
 					if (l > 6) {
 						j  = l%3;
@@ -518,27 +389,22 @@ function coloca_mascara(objCampo, mascara) {
 			if ( cur.value.length == len || cur.value.length > len ) {
 				cur.value = cur.value.substring(0 ,len);
 				return false;
-			}
-			else {
+			} else {
 				if ( r.length <= len ) {
 					cur.value = r;
-				}
-				else {
+				} else {
 					cur.value = z;
 				};
 			}
-		break;
+			break;
 	}
 }
 
-function somente_numero(numero)
-{
+function somente_numero(numero) {
 	var validos = "0123456789";
 	var numero_ok = '';
-	for(i = 0; i < numero.length; i++)
-	{
-		if(validos.indexOf(numero.substr(i,1)) != -1)
-		{
+	for(i = 0; i < numero.length; i++) {
+		if(validos.indexOf(numero.substr(i,1)) != -1) {
 			numero_ok += numero.substr(i,1);
 		}
 	}
@@ -548,7 +414,6 @@ function somente_numero(numero)
 function somente_letras(letra) {
 	var validos  = "_abcdefghijklmnopqrstuvxzywABCDEFGHIJKLMNOPQRSTUVXZYW ";
 	var letra_ok = '';
-
 	for(i = 0; i < letra.length; i++) {
 		if(validos.indexOf(letra.substr(i,1)) != -1) {
 			letra_ok += letra.substr(i,1);

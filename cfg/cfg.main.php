@@ -10,22 +10,22 @@ if (eregi("cfg.main.php", $PHP_SELF)) {
 /*
  * CONFIGURACOES BASICAS
  */
-define("DOMINIO", ""); // DOMINIO
-define("DIRETORIO", "/projeto_pessoal/mvc"); // DIRETORIO
-define('TITLE', 'CMS MVC'); // Titulo do site
-define("SITE", "projeto_pessoal/mvc"); // DIRETORIO
+define("DOMINIO", "");      // SEU DOMINIO, PARA SERVIDOR WEB
+define("DIRETORIO", "mvc"); // DIRETORIO
+define('TITLE', 'CMS MVC'); // TITULO DO SITE
+define("SITE", "mvc");      // DIRETORIO
 
 /*
  * META-TAGS
  */
-define('META_TITLE', 'CMS MVC'); // Titulo para a tag meta
-define('AUTOR', 'Rodrigo Pereira'); // Nome do autor do site
+define('META_TITLE', 'CMS MVC');    // TITULO PARA A META TAG
+define('AUTOR', 'Rodrigo Pereira'); // AUTOR DO PROJETO
 define('KEYWORDS', 'CMS MVC');
-define('IDENTIFIER', ''); // URL do site
+define('IDENTIFIER', ''); // URL DO SITE
 define('WEBTOOLS', 'r+jjtJH9LnqoDiArmjg4fzO6gwQjatimzQXtVyQJK8s=');
-define('DATECREATION', '23/07/2015'); // Data de criação do site
-define('ROBOTS', 'all, follow'); // Serviços utilizados pelo site
-define('CATEGORY', 'Internet');  // Categoria do site
+define('DATECREATION', '23/07/2012'); // DATA DE CRIAÇÃO DO SITE
+define('ROBOTS', 'all, follow'); // SERVIÇOS UTILIZADOS PELO SITE
+define('CATEGORY', 'Internet');  // CATEGORIA DO SITE
 define('DESCRIPTION', 'CMS MVC');
 define('SPAM', 'CMS MVC');
 

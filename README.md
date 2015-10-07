@@ -17,12 +17,13 @@ Reconfigurar os dados de acesso a banco no arquivo "cfg/cfg.main.php" adequando 
 - define("CURL_PATH", "/usr/bin/curl");
 
 ### Requisitos:
-HTTP Server. Por exemplo: Apache. Mod_rewrite ativado.
-PHP 5.3 ou superior.
-MySQL
+HTTP Server. Por exemplo: 
+- Apache. Mod_rewrite ativado.
+- PHP 5.3 ou superior.
+- MySQL
 
 Para visualizar no browser, basta aplicar os arquivo no servidor Apache. 
 
 E para ter acesso ao CMS o login e senha são: 
-login - desafio@teste.com.br 
-senha - qwe123qwe
+- login - desafio@teste.com.br 
+- senha - qwe123qwe

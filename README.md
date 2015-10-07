@@ -1,4 +1,4 @@
-# mvc
+# Projeto pessoal - Framework MVC
 Desafio técnico - Programador PHP
 
 ### Instalação:

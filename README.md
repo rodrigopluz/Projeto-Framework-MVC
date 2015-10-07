@@ -17,6 +17,7 @@ define("MYSQL_CHARSET", "utf8");
 define("COMMON_PATH", GLOBAL_PATH . "common/");
 define("CURL_PATH", "/usr/bin/curl");
 
+
 Requisitos:
 HTTP Server. Por exemplo: Apache. Mod_rewrite ativado.
 PHP 5.3 ou superior.

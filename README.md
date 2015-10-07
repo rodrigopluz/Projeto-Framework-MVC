@@ -1,24 +1,22 @@
 # mvc
 Desafio técnico - Programador PHP
 
-Instalação:
+### Instalação:
 Para ter acesso ao CMS tem na raiz tem uma copia inicial da base de dados - db.sql, basta importar o arquivo no PhpMyAdmin ou diretamente no console mysql.
 
 Reconfigurar os dados de acesso a banco no arquivo "cfg/cfg.main.php" adequando o seguinte trecho abaixo:
-/*
- * BANCO DE DADOS
- */
-define("DB_HOST", "");            // Localhost ou mysql.host.com.br
-define("DB_USED", "mysql");       // Banco de Dados a ser usado
-define("DB_USER", "");            // Nome do Usuario
-define("DB_PASS", "");            // Senha do Usuario
-define("DB_BASE", "");            // Banco de Dados
-define("MYSQL_CHARSET", "utf8");  
-define("COMMON_PATH", GLOBAL_PATH . "common/");
-define("CURL_PATH", "/usr/bin/curl");
 
+### BANCO DE DADOS
+- define("DB_HOST", "");            // Localhost ou mysql.host.com.br
+- define("DB_USED", "mysql");       // Banco de Dados a ser usado
+- define("DB_USER", "");            // Nome do Usuario
+- define("DB_PASS", "");            // Senha do Usuario
+- define("DB_BASE", "");            // Banco de Dados
+- define("MYSQL_CHARSET", "utf8");  
+- define("COMMON_PATH", GLOBAL_PATH . "common/");
+- define("CURL_PATH", "/usr/bin/curl");
 
-Requisitos:
+### Requisitos:
 HTTP Server. Por exemplo: Apache. Mod_rewrite ativado.
 PHP 5.3 ou superior.
 MySQL

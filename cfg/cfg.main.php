@@ -10,24 +10,24 @@ if (eregi("cfg.main.php", $PHP_SELF)) {
 /*
  * CONFIGURACOES BASICAS
  */
-define("DOMINIO", "");      // SEU DOMINIO, PARA SERVIDOR WEB
-define("DIRETORIO", "mvc"); // DIRETORIO
-define('TITLE', 'CMS MVC'); // TITULO DO SITE
-define("SITE", "mvc");      // DIRETORIO
+define("DOMINIO", "");                      // SEU DOMINIO, PARA SERVIDOR WEB
+define("DIRETORIO", "projeto_pessoal/mvc"); // DIRETORIO
+define('TITLE', 'CMS MVC');                 // TITULO DO SITE
+define("SITE", "projeto_pessoal/mvc");      // DIRETORIO
 
 /*
  * META-TAGS
  */
 define('META_TITLE', 'CMS MVC');    // TITULO PARA A META TAG
 define('AUTOR', 'Rodrigo Pereira'); // AUTOR DO PROJETO
-define('KEYWORDS', 'CMS MVC');
-define('IDENTIFIER', ''); // URL DO SITE
+define('KEYWORDS', 'CMS MVC');      //
+define('IDENTIFIER', '');           // URL DO SITE
 define('WEBTOOLS', 'r+jjtJH9LnqoDiArmjg4fzO6gwQjatimzQXtVyQJK8s=');
-define('DATECREATION', '23/07/2012'); // DATA DE CRIAÇÃO DO SITE
-define('ROBOTS', 'all, follow'); // SERVIÇOS UTILIZADOS PELO SITE
-define('CATEGORY', 'Internet');  // CATEGORIA DO SITE
-define('DESCRIPTION', 'CMS MVC');
-define('SPAM', 'CMS MVC');
+define('DATECREATION', '23/07/2012');   // DATA DE CRIAÇÃO DO SITE
+define('ROBOTS', 'all, follow');        // SERVIÇOS UTILIZADOS PELO SITE
+define('CATEGORY', 'Internet');         // CATEGORIA DO SITE
+define('DESCRIPTION', 'CMS MVC');       //
+define('SPAM', 'CMS MVC');              //
 
 /*
  * FOLDERS
@@ -41,12 +41,12 @@ define("BASE_URL", "http://" . DOMINIO . "/");
 /*
  * BANCO DE DADOS
  */
-define("DB_HOST", "localhost"); // Localhost ou mysql.host.com.br
-define("DB_USED", "mysql"); // Banco de Dados a ser usado
-define("DB_USER", "root");  // Nome do Usuario
-define("DB_PASS", "");      // Senha do Usuario
-define("DB_BASE", "mvc_cms"); // Banco de Dados
-define("MYSQL_CHARSET", "utf8"); // Banco de Dadoss
+define("DB_HOST", "localhost");     // Localhost ou mysql.host.com.br
+define("DB_USED", "mysql");         // Banco de Dados a ser usado
+define("DB_USER", "root");          // Nome do Usuario
+define("DB_PASS", "");              // Senha do Usuario
+define("DB_BASE", "mvc_cms");       // Banco de Dados
+define("MYSQL_CHARSET", "utf8");    // Banco de Dadoss
 define("COMMON_PATH", GLOBAL_PATH . "common/");
 define("CURL_PATH", "/usr/bin/curl");
 
@@ -94,8 +94,8 @@ define("CLASSE_GERAL", CLASSE_PATH . "geral.class.php");
 /*
  * CONTATO
  */
-define('EMAIL_ADMIN', 'rodrigopluz@gmail.com'); // Email para qual vão os logs de cadastro
-define('EMAIL_CONTATO', 'rodrigopluz@gmail.com'); //
+define('EMAIL_ADMIN', 'rodrigopluz@gmail.com');     // Email para qual vão os logs de cadastro
+define('EMAIL_CONTATO', 'rodrigopluz@gmail.com');   //
 define("IMG_MAIL_PATH", "");
 
 ?>
